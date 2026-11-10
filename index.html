@@ -1,13 +1,92 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>موقعي</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>موقع البطل - الكل 🔥</title>
+<style>
+body{margin:0;font-family:Arial;background:#000;color:#fff;text-align:center;padding:15px}
+h1{font-size:38px;color:#ffea00}
+.card{background:#1a1a1a;border:2px solid #ffea00;border-radius:20px;padding:15px;margin:15px 0}
+button{background:#ffea00;border:none;padding:12px 20px;border-radius:50px;font-size:18px;font-weight:bold;margin:4px}
+button:active{transform:scale(0.9)}
+input{padding:12px;border-radius:10px;border:none;font-size:18px;width:80%;text-align:center}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:300px;margin:auto}
+.cell{background:#333;height:80px;font-size:35px;border-radius:10px;border:none;color:white}
+#score{font-size:30px;color:#ffea00}
+</style>
 </head>
-<body style="text-align:center; background:yellow;">
-<h1>🔥 أهلا في موقعي</h1>
-<p>أنا سويته من جوالي</p>
-<button onclick="alert('أكفو يا بطل')">اضغط علي</button>
+<body>
+<h1>🔥 موقع البطل - الكل 🔥</h1>
+<p>نقاطك الكلية: <span id="score">0</span> 🏆</p>
+
+<div class="card">
+<h2>🎮 1 - تخمين الرقم</h2>
+<p>رقم من 1 الى 10</p>
+<input type="number" id="guess" placeholder="اكتب رقم">
+<br><br>
+<button onclick="check()">جرب حظك</button>
+<p id="r1"></p>
+</div>
+
+<div class="card">
+<h2>❌⭕ 2 - لعبة X و O</h2>
+<div class="grid">
+<button class="cell" onclick="play(this)"></button>
+<button class="cell" onclick="play(this)"></button>
+<button class="cell" onclick="play(this)"></button>
+<button class="cell" onclick="play(this)"></button>
+<button class="cell" onclick="play(this)"></button>
+<button class="cell" onclick="play(this)"></button>
+<button class="cell" onclick="play(this)"></button>
+<button class="cell" onclick="play(this)"></button>
+<button class="cell" onclick="play(this)"></button>
+</div>
+<br>
+<button onclick="location.reload()">لعبة جديدة 🔄</button>
+</div>
+
+<div class="card">
+<h2>⚡ 3 - اضغط بسرعة</h2>
+<p>اضغط 10 مرات بسرعة!</p>
+<p>ضغطاتك: <span id="clicks">0</span></p>
+<button onclick="clicker()" style="background:#00e5ff">اضغط علي بسرعة!!</button>
+<p id="r3"></p>
+</div>
+
+<div class="card">
+<h2>😂 4 - زر المقلب</h2>
+<button onclick="prank()" style="background:#ff0055;color:white">لا تضغط هنا</button>
+</div>
+
+<div class="card">
+<h2>👑 عني</h2>
+<p>انا البطل، سويت هذا كله من جوالي</p>
+<button onclick="window.open('https://github.com/ghbamdycbug-cpu')">حسابي على GitHub</button>
+</div>
+
+<script>
+let score=0, secret=Math.floor(Math.random()*10)+1, turn="X", clicks=0;
+function add(n){score+=n; document.getElementById('score').innerHTML=score;}
+function check(){
+let g=document.getElementById('guess').value;
+if(g==secret){document.getElementById('r1').innerHTML="🔥 كفووو جبته! +10"; add(10); secret=Math.floor(Math.random()*10)+1;}
+else if(g<secret) document.getElementById('r1').innerHTML="اكبر 👆";
+else document.getElementById('r1').innerHTML="اصغر 👇";
+}
+function play(b){
+if(b.innerHTML==""){b.innerHTML=turn; turn = turn=="X"?"O":"X";}
+}
+function clicker(){
+clicks++; document.getElementById('clicks').innerHTML=clicks;
+if(clicks==10){document.getElementById('r3').innerHTML="🔥🔥 وحششش! انت سريع +20"; add(20); clicks=0;}
+}
+function prank(){
+alert("قلت لك لا تضغط 😂");
+alert("انت عنيد!");
+alert("خلاص انت البطل ❤️");
+}
+</script>
 </body>
 </html>
